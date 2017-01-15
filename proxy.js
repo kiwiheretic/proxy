@@ -110,6 +110,7 @@ function standard_response(request, response) {
                 respdata = JSON.stringify(o);
                 response.write(respdata);
                 response.setHeader('Content-Type', 'application/json');
+                response.setHeader("Content-Length", respdata.length);
                 response.close();
             } else {
                 response.write("Page open via proxy failed");
