@@ -103,15 +103,28 @@ function standard_response(request, response) {
         var url = request.post.url;
         console.log("POST = " + JSON.stringify(request.post))
         console.log('url = '+ url);
+        var page_responses = [];
+        
+        page.onResourceReceived = function(response) {
+          page_responses.push(response);
+        };
+
+        page.onInitialized = function() {
+          var headers = JSON.stringify(page.customHeaders);
+          console.log("pages headers = "+headers);
+        };
+
         page.open(url, function(status) {
             console.log('Status: ' + status);
             if (status == "success") {
-                o = {content:encodeURIComponent(page.content)};
-                respdata = JSON.stringify(o);
+                var o = {content:encodeURIComponent(page.content),
+                         responses:page_responses,
+                         original_headers:request.headers};
+                var respdata = JSON.stringify(o);
                 response.setHeader('Content-Type', 'application/json');
                 response.setHeader("Content-Length", respdata.length);
                 response.write(respdata);
-                response.closeGracefully();
+                response.close();
             } else {
                 response.write("Page open via proxy failed");
                 response.close();

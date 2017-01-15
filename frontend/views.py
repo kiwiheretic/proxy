@@ -10,6 +10,7 @@ def index(request):
         r = requests.post('http://127.0.0.1:5001', data = {'url':url})
         print r.headers
         json = r.json()
+        print json.keys()
         content = urllib.unquote(json['content'])
         return HttpResponse(content)
     else:

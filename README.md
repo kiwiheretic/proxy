@@ -40,5 +40,5 @@ $ ./manage.py runserver 0.0.0.0:5000
 
 access via web browser url
 
-http://<ip>:5000
+http://\<ip\>:5000
 
