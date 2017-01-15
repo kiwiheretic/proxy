@@ -1,0 +1,6 @@
+[submodule "sprintf.js"]
+	path = sprintf.js
+	url = https://github.com/alexei/sprintf.js.git
+[submodule "optparse-js"]
+	path = optparse-js
+	url = https://github.com/jfd/optparse-js.git

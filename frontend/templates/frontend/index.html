@@ -5,8 +5,10 @@
 {% block content %}
 
 <h1>Proxy</h1>
+<p>PhantomJS Proxy with Django front end<p>
 
 <form action="." method="POST">
+{% csrf_token %}
     <label for="url">Url:</label>
     <input type="text" name="url">
     <input type="submit" value="Submit">
