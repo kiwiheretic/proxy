@@ -106,12 +106,12 @@ function standard_response(request, response) {
         page.open(url, function(status) {
             console.log('Status: ' + status);
             if (status == "success") {
-                o = {content:page.content};
+                o = {content:encodeURIComponent(page.content)};
                 respdata = JSON.stringify(o);
-                response.write(respdata);
                 response.setHeader('Content-Type', 'application/json');
                 response.setHeader("Content-Length", respdata.length);
-                response.close();
+                response.write(respdata);
+                response.closeGracefully();
             } else {
                 response.write("Page open via proxy failed");
                 response.close();
